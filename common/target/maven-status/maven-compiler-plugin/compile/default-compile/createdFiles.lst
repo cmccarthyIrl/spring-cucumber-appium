@@ -1,0 +1,8 @@
+com/cmccarthy/common/utils/MobileDriverFactory.class
+com/cmccarthy/common/utils/MobileCapabilities.class
+com/cmccarthy/common/config/PageObjectBeanPostProcessor.class
+com/cmccarthy/common/utils/MobilePropertiesContext.class
+com/cmccarthy/common/utils/AppiumServer.class
+com/cmccarthy/common/utils/MobileWait.class
+com/cmccarthy/common/config/PageObject.class
+com/cmccarthy/common/config/Config.class

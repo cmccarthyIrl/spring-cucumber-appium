@@ -1,0 +1,8 @@
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/utils/MobileCapabilities.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/utils/AppiumServer.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/utils/MobileWait.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/config/PageObjectBeanPostProcessor.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/utils/MobileDriverFactory.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/config/PageObject.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/config/Config.java
+/home/craig/IdeaProjects/spring-cucumber-appium/common/src/main/java/com/cmccarthy/common/utils/MobilePropertiesContext.java

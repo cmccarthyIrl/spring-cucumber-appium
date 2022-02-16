@@ -20,8 +20,6 @@ public class MobileDriverFactory {
 
     private AppiumDriver<MobileElement> driver;
 
-    private int WAIT_TIMEOUT = 10;
-
     @Bean(name = "mobileDriver")
     public AppiumDriver<MobileElement> mobileDriver() {
         appiumServer.startAppiumServer();
@@ -52,6 +50,7 @@ public class MobileDriverFactory {
 
     @Bean(name = "mobileDriverWait")
     public WebDriverWait mobileDriverWait() {
+        int WAIT_TIMEOUT = 10;
         return new WebDriverWait(driver, WAIT_TIMEOUT);
     }
 }

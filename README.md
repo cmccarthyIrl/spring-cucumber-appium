@@ -115,7 +115,7 @@ Appium `<dependencies>`:
 
 # TestNG
 
-By using the [TestNG Framework](https://junit.org/junit4/) we can utilize the [Cucumber Framework](https://cucumber.io/)
+By using the [TestNG Framework](https://testng.org/doc/) we can utilize the [Cucumber Framework](https://cucumber.io/)
 and the `@CucumberOptions` Annotation Type to execute the `*.feature` file tests
 
 > Right click the `WikipediParallelRunner` class and select `Run`
@@ -131,7 +131,7 @@ and the `@CucumberOptions` Annotation Type to execute the `*.feature` file tests
                 "json:target/cucumber/report.json",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         })
-public class WikipediaParallelRunnerTest extends AbstractTestNGCucumberTests {
+public class RunCucumberApp1Test extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider(parallel = true)
@@ -152,7 +152,7 @@ Note that the `mvn test` command only runs test classes that follow the `*Test.j
 You can run a single test or a suite or tests like so :
 
 ```
-mvn test -Dtest=WikipediaParallelRunnerTest
+mvn test -Dtest=RunCucumberApp1Test
 ```
 
 Note that the `mvn clean install` command runs all test Classes that follow the `*Test.java` naming convention

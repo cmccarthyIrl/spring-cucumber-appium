@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
                 "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"
         },
         glue = {"com/cmccarthy/app2", "com/cmccarthy/common"})
-public class RunCucumberTests extends AbstractTestNGCucumberTests {
+public class RunCucumberApp1Test extends AbstractTestNGCucumberTests {
 
         @Override
         @DataProvider(parallel = true)

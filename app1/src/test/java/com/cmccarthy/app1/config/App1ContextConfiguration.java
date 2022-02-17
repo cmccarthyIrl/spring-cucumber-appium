@@ -17,5 +17,4 @@ public class App1ContextConfiguration {
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
 }

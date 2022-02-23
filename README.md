@@ -108,11 +108,18 @@ Appium `<dependencies>`:
 
 # Quickstart
 
+**Install** 
 - [Intellij IDE](https://www.jetbrains.com/idea/) - `Recommended`
 - [Java JDK 11](https://jdk.java.net/java-se-ri/11)
 - [Android Studio / SDK](https://developer.android.com/studio)
 - [Apache Maven 3.6.3](https://maven.apache.org/docs/3.6.3/release-notes.html)
-
+- 
+**Set**
+```markdown
+set ANDROID_HOME=C:\Users\<USER>\AppData\Local\Android\Sdk
+set ANDROID_ROOT_DIR=C:\Users\<USER>\AppData\Local\Android\Sdk
+set PATH=%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools
+```
 # TestNG
 
 By using the [TestNG Framework](https://testng.org/doc/) we can utilize the [Cucumber Framework](https://cucumber.io/)

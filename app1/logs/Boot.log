@@ -1,4 +1,3 @@
-2022-02-17 12:23:51 [TestNG-PoolService-0] [ INFO]                Hooks - Starting Hooks on pc with PID 20781 (/home/craig/IdeaProjects/spring-cucumber-appium/app1/target/test-classes started by craig in /home/craig/IdeaProjects/spring-cucumber-appium/app1)
-2022-02-17 12:23:51 [TestNG-PoolService-0] [DEBUG]                Hooks - Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
-2022-02-17 12:23:51 [TestNG-PoolService-0] [ INFO]                Hooks - The following profiles are active: prod
-2022-02-17 12:24:19 [TestNG-PoolService-0] [ INFO]                Hooks - Started Hooks in 28.988 seconds (JVM running for 37.637)
+2022-02-23 11:04:02 [TestNG-PoolService-0] [ INFO]                Hooks - Starting Hooks on PL-AU-R914RZ4J with PID 8408 (C:\Users\cmccarthy\IdeaProjects\spring-cucumber-appium\app1\target\test-classes started by cmccarthy in C:\Users\cmccarthy\IdeaProjects\spring-cucumber-appium\app1)
+2022-02-23 11:04:02 [TestNG-PoolService-0] [DEBUG]                Hooks - Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2022-02-23 11:04:02 [TestNG-PoolService-0] [ INFO]                Hooks - The following profiles are active: prod

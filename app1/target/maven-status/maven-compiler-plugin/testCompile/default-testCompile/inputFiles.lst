@@ -1,8 +1,8 @@
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/config/App1ContextConfiguration.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/pageObjects/LoginSignUpPage.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/steps/Hooks.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/config/App1AbstractTestDefinition.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/steps/MagicTabSteps.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/pageObjects/MagicTabPage.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/RunCucumberTests.java
-/home/craig/IdeaProjects/spring-cucumber-appium/app1/src/test/java/com/cmccarthy/app1/pageObjects/TabBar.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\pageObjects\MagicTabPage.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\pageObjects\TabBar.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\pageObjects\LoginSignUpPage.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\steps\MagicTabSteps.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\config\App1AbstractTestDefinition.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\config\App1ContextConfiguration.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\RunCucumberTests.java
+C:\Users\Craig\IdeaProjects\spring-cucumber-appium\app1\src\test\java\com\cmccarthy\app1\steps\Hooks.java

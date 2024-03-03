@@ -1,0 +1,9 @@
+/*/target
+target
+/*/*.log
+*.log
+.idea
+/.idea/
+/common/target/
+/app2/target/
+/app1/target/

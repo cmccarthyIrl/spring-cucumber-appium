@@ -13,9 +13,9 @@ import org.testng.annotations.DataProvider;
         glue = {"com/cmccarthy/app2", "com/cmccarthy/common"})
 public class RunCucumberApp1Test extends AbstractTestNGCucumberTests {
 
-        @Override
-        @DataProvider(parallel = true)
-        public Object[][] scenarios() {
-                return super.scenarios();
-        }
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
 }

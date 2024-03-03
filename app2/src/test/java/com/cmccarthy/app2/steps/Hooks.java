@@ -1,7 +1,7 @@
 package com.cmccarthy.app2.steps;
 
 import com.cmccarthy.app2.config.App2AbstractTestDefinition;
-import com.cmccarthy.common.utils.AppiumServer;
+import com.cmccarthy.common.utils.services.AppiumService;
 import com.cmccarthy.common.utils.HookUtils;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Hooks extends App2AbstractTestDefinition {
 
     @Autowired
-    private AppiumServer server;
+    private AppiumService server;
 
     @Autowired
     private HookUtils hookUtils;

@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/resources/features"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-                "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         glue = {"com/cmccarthy/app1", "com/cmccarthy/common"})
 public class RunCucumberTests extends AbstractTestNGCucumberTests {

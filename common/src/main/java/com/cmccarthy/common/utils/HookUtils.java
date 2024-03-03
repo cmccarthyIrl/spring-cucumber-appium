@@ -1,5 +1,6 @@
 package com.cmccarthy.common.utils;
 
+import com.cmccarthy.common.utils.services.DriverService;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,11 +15,11 @@ import java.util.Locale;
 public class HookUtils {
 
     @Autowired
-    private MobileDriverFactory mobileDriverFactory;
+    private DriverService driverService;
 
     public void takeScreenShot(Scenario scenario) {
         if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) mobileDriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+            final byte[] screenshot = ((TakesScreenshot) driverService.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
     }

@@ -1,15 +1,15 @@
 package com.cmccarthy.app1.pageObjects;
 
 import com.cmccarthy.common.config.PageObject;
-import com.cmccarthy.common.utils.MobileWait;
-import io.appium.java_client.MobileElement;
+import com.cmccarthy.common.utils.Screen;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 
 @PageObject
-public abstract class TabBar extends MobileWait {
+public abstract class TabBar extends Screen {
 
     @iOSXCUITFindBy(id = "Log in")
-    private MobileElement profile;
+    private WebElement profile;
 
     public LoginSignUpPage clickProfileButton() {
         profile.click();

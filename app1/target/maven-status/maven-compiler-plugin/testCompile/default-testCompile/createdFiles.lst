@@ -1,8 +1,0 @@
-com\cmccarthy\app1\config\App1AbstractTestDefinition.class
-com\cmccarthy\app1\steps\Hooks.class
-com\cmccarthy\app1\pageObjects\MagicTabPage.class
-com\cmccarthy\app1\config\App1ContextConfiguration.class
-com\cmccarthy\app1\pageObjects\LoginSignUpPage.class
-com\cmccarthy\app1\pageObjects\TabBar.class
-com\cmccarthy\app1\steps\MagicTabSteps.class
-com\cmccarthy\app1\RunCucumberTests.class

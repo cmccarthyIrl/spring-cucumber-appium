@@ -12,7 +12,6 @@ import org.springframework.retry.annotation.EnableRetry;
 @ComponentScan(basePackages = {"com.cmccarthy.app2", "com.cmccarthy.common"})
 @PropertySource("classpath:/application.properties")
 public class App2ContextConfiguration {
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();

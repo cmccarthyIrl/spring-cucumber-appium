@@ -8,6 +8,7 @@
 
 # Maven
 
+
 The Framework uses [Spring Boot Test](https://spring.io/guides/gs/testing-web/), [Cucumber](https://cucumber.io/) and [Appium](https://appium.io/) client implementations.
 
 Spring `<dependencies>`:

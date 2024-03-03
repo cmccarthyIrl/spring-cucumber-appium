@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>app1</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>spring-cucumber-appium</groupId>

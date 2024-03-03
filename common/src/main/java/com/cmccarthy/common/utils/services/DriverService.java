@@ -2,13 +2,12 @@ package com.cmccarthy.common.utils.services;
 
 import com.cmccarthy.common.properties.DeviceProperties;
 import com.cmccarthy.common.utils.Capabilities;
+import com.cmccarthy.common.utils.LogManager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -19,19 +18,18 @@ import java.time.Duration;
 @Lazy
 public class DriverService {
 
-    @Autowired
-    @Lazy
-    private AppiumService appiumService;
+    private final LogManager logger = new LogManager(DriverService.class);
 
-    @Autowired
-    @Lazy
-    private DeviceProperties deviceProperties;
-
-    @Autowired
-    @Lazy
-    private Capabilities capabilities;
-
+    private final AppiumService appiumService;
+    private final DeviceProperties deviceProperties;
+    private final Capabilities capabilities;
     private AppiumDriver driver;
+
+    public DriverService(AppiumService appiumService, DeviceProperties deviceProperties, Capabilities capabilities) {
+        this.appiumService = appiumService;
+        this.deviceProperties = deviceProperties;
+        this.capabilities = capabilities;
+    }
 
     @Bean(name = "mobileDriver")
     public AppiumDriver mobileDriver() {
@@ -41,15 +39,15 @@ public class DriverService {
                 try {
                     driver = new IOSDriver(appiumService.getServerUrl(), ((XCUITestOptions) capabilities.getCapabilities()));
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    logger.error(exception.getMessage());
                 }
-
                 break;
             case "android":
                 try {
                     driver = new AndroidDriver(appiumService.getServerUrl(), ((UiAutomator2Options) capabilities.getCapabilities()));
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    logger.error(exception.getMessage());
+
                 }
                 break;
             default:
@@ -69,12 +67,6 @@ public class DriverService {
 
     public boolean isIOS() {
         return deviceProperties.getPlatformName().equalsIgnoreCase("iOS");
-    }
-
-    @Bean(name = "mobileDriverWait")
-    public WebDriverWait mobileDriverWait() {
-        int WAIT_TIMEOUT = 10;
-        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT));
     }
 
     public void setDriverTimeout(int timeout) {

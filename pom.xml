@@ -234,6 +234,12 @@
             </properties>
         </profile>
         <profile>
+            <id>android-emulator</id>
+            <properties>
+                <spring.profiles.active>android-emulator</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
             <id>iphone</id>
             <properties>
                 <spring.profiles.active>iphone</spring.profiles.active>

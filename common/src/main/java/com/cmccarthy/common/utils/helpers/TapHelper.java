@@ -19,27 +19,14 @@ public interface TapHelper extends WaitHelper {
 
     LogManager logger = new LogManager(TapHelper.class);
 
-    default void tap(AppiumDriver driver, By locator) throws NoSuchElementException {
-        try {
-            getWait(driver).until(ExpectedConditions.elementToBeClickable(locator)).click();
-        } catch (Exception ignored) {
-            logger.warn("Could not tap on the element, try tapping again");
-            try {
-                getWait(driver).until(ExpectedConditions.elementToBeClickable(locator)).click();
-            } catch (Exception ex1) {
-                logger.warn("Could not tap on the element");
-                throw new NoSuchElementException("Could not tap on the element : " + ex1.getMessage());
-            }
-        }
-    }
-
     default void tap(AppiumDriver driver, WebElement element) throws NoSuchElementException {
         try {
-            getWait(driver).until(ExpectedConditions.elementToBeClickable(element)).click();
+            getWait(driver).until(ExpectedConditions.visibilityOf(element)).click();
         } catch (Exception ignored) {
+            ignored.printStackTrace();
             logger.warn("Could not tap on the element, try tapping again");
             try {
-                getWait(driver).until(ExpectedConditions.elementToBeClickable(element)).click();
+                getWait(driver).until(ExpectedConditions.visibilityOf(element)).click();
             } catch (Exception ex1) {
                 logger.warn("Could not tap on the element");
                 throw new NoSuchElementException("Could not tap on the element : " + ex1.getMessage());

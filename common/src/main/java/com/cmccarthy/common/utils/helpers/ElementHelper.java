@@ -15,9 +15,17 @@ public interface ElementHelper extends WaitHelper {
 
     LogManager logger = new LogManager(ElementHelper.class);
 
-    default boolean isElementDisplayed(WebElement element, By locator) {
+    default boolean isNestedElementDisplayed(AppiumDriver driver, WebElement element, By locator) {
         try {
             return element.findElement(locator).isDisplayed();
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    default boolean isElementDisplayed(WebElement element) {
+        try {
+            return element.isDisplayed();
         } catch (Exception ex) {
             return false;
         }

@@ -16,7 +16,7 @@ public interface WaitHelper {
 
     default Wait<AppiumDriver> getWait(AppiumDriver driver) {
         return new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(System.getProperty("INTEGRATION").equals("local") ? 30 : 60))
+                .withTimeout(Duration.ofSeconds(40))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
     }

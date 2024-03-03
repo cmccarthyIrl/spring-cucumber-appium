@@ -121,7 +121,6 @@ public interface SwipeHelper extends ElementHelper {
         for (int x = 0; x < numTimes; x++) {
             try {
                 element = driver.findElement(locator);
-                logger.debug("Element " + element + " has been located");
 
                 String isElementDisplayed = isElementOnScreen(driver, screenTop, screenBottom, element);
                 if (!isElementDisplayed.equals("true")) {

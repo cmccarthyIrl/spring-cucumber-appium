@@ -8,6 +8,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -23,7 +24,7 @@ public class PageObjectBeanPostProcessor implements BeanPostProcessor {
     public AppiumDriver mobileDriver;
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, @NonNull String beanName) throws BeansException {
         if (bean.getClass().isAnnotationPresent(PageObject.class)) {
             PageFactory.initElements(new AppiumFieldDecorator(mobileDriver, Duration.ofSeconds(10)), bean);
         }
@@ -31,7 +32,7 @@ public class PageObjectBeanPostProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@NonNull Object bean, @NonNull String beanName) throws BeansException {
         return bean;
     }
 }

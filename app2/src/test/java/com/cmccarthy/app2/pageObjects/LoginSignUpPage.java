@@ -23,18 +23,18 @@ public class LoginSignUpPage extends TabBar {
     private WebElement signUpButton;
 
     public boolean isLogInWithFacebookButtonDisplayed() {
-        return logInWithFacebookButton.isDisplayed();
+        return isElementDisplayed(logInWithFacebookButton);
     }
 
     public boolean isSignUpButtonDisplayed() {
-        return signUpButton.isDisplayed();
+        return isElementDisplayed(signUpButton);
     }
 
     public boolean isLogInButtonDisplayed() {
         try {
-            return logInButton.get(1).isDisplayed();
+            return isElementDisplayed(logInButton.get(1));
         } catch (IndexOutOfBoundsException e) {
-            return logInButton.get(0).isDisplayed();
+            return isElementDisplayed(logInButton.get(0));
         }
     }
 }

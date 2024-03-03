@@ -4,21 +4,18 @@ import com.cmccarthy.common.properties.DeviceProperties;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.openqa.selenium.ScreenOrientation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 
 @Component
 public class Capabilities {
 
-    @Autowired
-    private DeviceProperties deviceProperties;
+    private final DeviceProperties deviceProperties;
 
-    private final Path path = Paths.get("src", "test", "resources");
+    public Capabilities(DeviceProperties deviceProperties) {
+        this.deviceProperties = deviceProperties;
+    }
 
     public XCUITestOptions getIOSAppiumCapabilities() {
         final XCUITestOptions options = new XCUITestOptions();

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -28,26 +27,32 @@ public class DeviceProperties {
     public String getDeviceName() {
         return deviceName;
     }
+
     @Bean("platformVersion")
     public String getPlatformVersion() {
         return platformVersion;
     }
+
     @Bean("platformName")
     public String getPlatformName() {
         return platformName;
     }
+
     @Bean("bundleId")
     public String getBundleId() {
         return bundleId;
     }
+
     @Bean("app")
     public String getApp() {
         return app;
     }
+
     @Bean("appActivity")
     public String getAppActivity() {
         return appActivity;
     }
+
     @Bean("appPackage")
     public String getAppPackage() {
         return appPackage;

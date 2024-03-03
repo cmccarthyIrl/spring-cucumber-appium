@@ -1,9 +1,9 @@
 package com.cmccarthy.app1.pageObjects;
 
 import com.cmccarthy.common.config.PageObject;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -12,29 +12,29 @@ public class LoginSignUpPage extends TabBar {
 
     @AndroidFindBy(id = "facebook_login_button")
     @iOSXCUITFindBy(id = "Log in with Facebook")
-    private MobileElement logInWithFacebookButton;
+    private WebElement logInWithFacebookButton;
 
     @AndroidFindBy(id = "login_button")
     @iOSXCUITFindBy(id = "Log in")
-    private List<MobileElement> logInButton;
+    private List<WebElement> logInButton;
 
     @AndroidFindBy(id = "sign_up_button")
     @iOSXCUITFindBy(id = "Sign up")
-    private MobileElement signUpButton;
+    private WebElement signUpButton;
 
     public boolean isLogInWithFacebookButtonDisplayed() {
-        return logInWithFacebookButton.isDisplayed();
+        return isElementDisplayed(logInWithFacebookButton);
     }
 
     public boolean isSignUpButtonDisplayed() {
-        return signUpButton.isDisplayed();
+        return isElementDisplayed(signUpButton);
     }
 
     public boolean isLogInButtonDisplayed() {
         try {
-            return logInButton.get(1).isDisplayed();
+            return isElementDisplayed(logInButton.get(1));
         } catch (IndexOutOfBoundsException e) {
-            return logInButton.get(0).isDisplayed();
+            return isElementDisplayed(logInButton.get(0));
         }
     }
 }

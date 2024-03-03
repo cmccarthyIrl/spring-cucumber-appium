@@ -5,8 +5,7 @@ import com.cmccarthy.app1.pageObjects.MagicTabPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.Assert.assertTrue;
+import org.testng.Assert;
 
 public class MagicTabSteps {
 
@@ -18,9 +17,9 @@ public class MagicTabSteps {
 
     @Then("^I should see Login in Sign Up buttons$")
     public void iShouldSeeLoginButtons() {
-        assertTrue(loginSignUpPage.isLogInWithFacebookButtonDisplayed());
-        assertTrue(loginSignUpPage.isSignUpButtonDisplayed());
-        assertTrue(loginSignUpPage.isLogInButtonDisplayed());
+        Assert.assertTrue(loginSignUpPage.isLogInWithFacebookButtonDisplayed());
+        Assert.assertTrue(loginSignUpPage.isSignUpButtonDisplayed());
+        Assert.assertTrue(loginSignUpPage.isLogInButtonDisplayed());
     }
 
     @Given("I tap Sign up or Log In button")

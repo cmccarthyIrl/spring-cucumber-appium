@@ -1,43 +1,10 @@
-# Spring - Cucumber - Appium
+# Appium Test Automation Framework
 
-# Index
+## Index
 
-<table> 
-<tr>
-  <th>Start</th>
-  <td>
-    | <a href="#maven">Maven</a> 
-    | <a href="#quickstart">Quickstart</a> | 
-  </td>
-</tr>
-<tr>
-  <th>Run</th>
-  <td>
-     | <a href="#junit">TestNG</a>
-    | <a href="#command-line">Command Line</a>
-    | <a href="#ide-support">IDE Support</a>    
-    | <a href="#java-jdk">Java JDK</a>    
-    | <a href="#troubleshooting">Troubleshooting</a>    |
-  </td>
-</tr>
-<tr>
-  <th>Report</th> 
-  <td>
-     | <a href="#configuration">Configuration</a> 
-    | <a href="#environment-switching">Environment Switching</a>
-    | <a href="#extent-reports">Spark HTML Reports</a>
-    | <a href="#logging">Logging</a> |
-  </td>
-</tr>
-<tr>
-  <th>Advanced</th>
-  <td>
-    | <a href="#hooks">Before / After Hooks</a>
-    | <a href="#json-transforms">JSON Transforms</a>
-    | <a href="#contributing">Contributing</a> |
-    </td>
-</tr>
-</table>
+| Start | Run | Report | Advanced |
+|-------|-----|--------|----------|
+| [Maven](#maven) \| [Quickstart](#quickstart) | [TestNG](#testng) \| [Command Line](#command-line) \| [IDE Support](#ide-support) \| [Java JDK](#java-jdk) \| [Troubleshooting](#troubleshooting) | [Configuration](#configuration) \| [Environment Switching](#environment-switching) \| [Extent Reports](#extent-reports) \| [Allure Reports](#allure-reports) \| [Logging](#logging) \| [Before / After Hooks](#before--after-hooks) | [JSON Transforms](#json-transforms) \| [Contributing](#contributing) |
 
 # Maven
 
@@ -46,8 +13,7 @@ The Framework uses [Spring Boot Test](https://spring.io/guides/gs/testing-web/),
 Spring `<dependencies>`:
 
 ```xml
-
-<dependecies>
+<dependencies>
     ...
     <dependency>
         <groupId>org.springframework.amqp</groupId>
@@ -63,14 +29,13 @@ Spring `<dependencies>`:
         <artifactId>spring-test</artifactId>
     </dependency>
     ...
-</dependecies>
+</dependencies>
 ```
 
 Cucumber `<dependencies>`:
 
 ```xml
-
-<dependecies>
+<dependencies>
     ...
     <dependency>
         <groupId>io.cucumber</groupId>
@@ -88,14 +53,13 @@ Cucumber `<dependencies>`:
         <version>${cucumber.version}</version>
     </dependency>
     ...
-</dependecies>
+</dependencies>
 ```
 
 Appium `<dependencies>`:
 
 ```xml
-
-<dependecies>
+<dependencies>
     ...
   <dependency>
     <groupId>io.appium</groupId>
@@ -103,32 +67,33 @@ Appium `<dependencies>`:
     <version>${appium.version}</version>
   </dependency>
     ...
-</dependecies>
+</dependencies>
 ```
 
 # Quickstart
 
-**Install** 
+**Install**:
+
 - [Intellij IDE](https://www.jetbrains.com/idea/) - `Recommended`
 - [Java JDK 11](https://jdk.java.net/java-se-ri/11)
 - [Android Studio / SDK](https://developer.android.com/studio)
 - [Apache Maven 3.6.3](https://maven.apache.org/docs/3.6.3/release-notes.html)
-- 
-**Set**
+
+**Set**:
+
 ```markdown
 set ANDROID_HOME=C:\Users\<USER>\AppData\Local\Android\Sdk
 set ANDROID_ROOT_DIR=C:\Users\<USER>\AppData\Local\Android\Sdk
 set PATH=%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools
 ```
+
 # TestNG
 
-By using the [TestNG Framework](https://testng.org/doc/) we can utilize the [Cucumber Framework](https://cucumber.io/)
-and the `@CucumberOptions` Annotation Type to execute the `*.feature` file tests
+By using the [TestNG Framework](https://testng.org/doc/), we can utilize the [Cucumber Framework](https://cucumber.io/) and the `@CucumberOptions` Annotation Type to execute the `*.feature` file tests.
 
-> Right click the `WikipediParallelRunner` class and select `Run`
+> Right-click the `WikipediParallelRunner` class and select `Run`
 
 ```java
-
 @CucumberOptions(
         features = {
                 "src/test/resources/feature"
@@ -151,18 +116,17 @@ public class RunCucumberApp1Test extends AbstractTestNGCucumberTests {
 
 # Command Line
 
-Normally you will use your IDE to run a `*.feature` file directly or via the `*Test.java` class. With the `Test` class,
-we can run tests from the command-line as well.
+Normally, you will use your IDE to run a `*.feature` file directly or via the `*Test.java` class. With the `Test` class, we can run tests from the command-line as well.
 
 Note that the `mvn test` command only runs test classes that follow the `*Test.java` naming convention.
 
-You can run a single test or a suite or tests like so :
+You can run a single test or a suite or tests like so:
 
 ```
 mvn test -Dtest=RunCucumberApp1Test
 ```
 
-Note that the `mvn clean install` command runs all test Classes that follow the `*Test.java` naming convention
+Note that the `mvn clean install` command runs all test Classes that follow the `*Test.java` naming convention.
 
 ```
 mvn clean install
@@ -170,10 +134,9 @@ mvn clean install
 
 # IDE Support
 
-To minimize the discrepancies between IDE versions and Locales the `<sourceEncoding>` is set to `UTF-8`
+To minimize the discrepancies between IDE versions and locales the `<sourceEncoding>` is set to `UTF-8`
 
 ```xml
-
 <properties>
     ...
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -187,7 +150,6 @@ To minimize the discrepancies between IDE versions and Locales the `<sourceEncod
 The Java version to use is defined in the `maven-compiler-plugin`
 
 ```xml
-
 <build>
     ...
     <pluginManagement>
@@ -210,22 +172,18 @@ The Java version to use is defined in the `maven-compiler-plugin`
 
 # Configuration
 
-The `AbstractTestDefinition` class is responsible for specifying each Step class as `@SpringBootTest` and
-its `@ContextConfiguration`
+The `AbstractTestDefinition` class is responsible for specifying each Step class as `@SpringBootTest` and its `@ContextConfiguration`
 
 ```java
-
 @ContextConfiguration(classes = {FrameworkContextConfiguration.class})
 @SpringBootTest
 public class AbstractTestDefinition {
 }
 ```
 
-The `FrameworkContextConfiguration` class is responsible for specifying the Spring `@Configuration`, modules to scan,
-properties to use etc
+The `FrameworkContextConfiguration` class is responsible for specifying the Spring `@Configuration`, modules to scan, properties to use, etc.
 
 ```java
-
 @EnableRetry
 @Configuration
 @ComponentScan({
@@ -238,13 +196,11 @@ public class FrameworkContextConfiguration {
 
 # Environment Switching
 
-There is only one thing you need to do to switch the environment - which is to set `<activeByDefault>` property in the
-Master POM.
+There is only one thing you need to do to switch the environment - which is to set `<activeByDefault>` property in the Master POM.
 
 > By default, the value of `spring.profiles.active` is defined in the `application.properties` file which inherits its value from the Master POM property `<activeByDefault>`
 
 ```xml
-
 <profiles>
     ...
     <profile>
@@ -269,7 +225,7 @@ mvn clean install -P dev
 Below is an example of the `application.properties` file.
 
 ```properties
-spring.profiles.active=@activatedProperties@
+spring.profiles.active=@
 ```
 
 # Extent Reports
@@ -294,8 +250,7 @@ To generate the above report navigate to the root directory of the module under 
 
 # Logging
 
-The Framework uses [Log4j2](https://logging.apache.org/log4j/2.x/) You can instantiate the logging service in any Class
-like so
+The Framework uses [Log4j2](https://logging.apache.org/log4j/2.x/) You can instantiate the logging service in any Class like so
 
 ```java
 private final Logger logger=LoggerFactory.getLogger(WikipediaPageSteps.class);
@@ -317,7 +272,6 @@ The [Logback](http://logback.qos.ch/) logging service is initialized from the `H
 As the Cucumber Hooks are implemented by all steps we can configure the `@CucumberContextConfiguration` like so :
 
 ```java
-
 @CucumberContextConfiguration
 public class Hooks extends AbstractTestDefinition {
 
@@ -336,7 +290,6 @@ public class Hooks extends AbstractTestDefinition {
 }
 ```
 
-
 # Troubleshooting
 
 - Execute the following commands to resolve any dependency issues
@@ -348,5 +301,3 @@ public class Hooks extends AbstractTestDefinition {
 Spotted a mistake? Questions? Suggestions?
 
 [Open an Issue](https://github.com/cmccarthyIrl/spring-cucumber-appium/issues)
-
-

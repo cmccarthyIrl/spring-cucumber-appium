@@ -1,9 +1,9 @@
 package com.cmccarthy.common.utils;
 
+import com.cmccarthy.common.utils.services.DriverService;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -13,17 +13,23 @@ import java.util.Locale;
 @Component
 public class HookUtils {
 
-    @Autowired
-    private MobileDriverFactory mobileDriverFactory;
+    private final LogManager logger = new LogManager(HookUtils.class);
+
+    private final DriverService driverService;
+
+    public HookUtils(DriverService driverService) {
+        this.driverService = driverService;
+    }
 
     public void takeScreenShot(Scenario scenario) {
         if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) mobileDriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+            final byte[] screenshot = ((TakesScreenshot) driverService.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
     }
 
     public void closeEmulator() {
+        logger.debug("Started close emulator");
         try {
             Process process;
             if (getOperatingSystem().equals("win")) {
@@ -39,18 +45,22 @@ public class HookUtils {
                 line = reader.readLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.debug("Finished closed emulator");
     }
 
 
     private String getOperatingSystem() {
         String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ROOT);
         if (os.contains("mac") || os.contains("darwin")) {
+            logger.debug("The operating system is Mac");
             return "mac";
         } else if (os.contains("win")) {
+            logger.debug("The operating system is Windows");
             return "win";
         } else {
+            logger.debug("The operating system is Linux");
             return "linux";
         }
     }

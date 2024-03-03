@@ -1,29 +1,35 @@
 package com.cmccarthy.app1.steps;
 
 import com.cmccarthy.app1.config.App1AbstractTestDefinition;
-import com.cmccarthy.common.utils.AppiumServer;
 import com.cmccarthy.common.utils.HookUtils;
+import com.cmccarthy.common.utils.LogManager;
+import com.cmccarthy.common.utils.services.AppiumService;
+import com.cmccarthy.common.utils.services.DriverService;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @CucumberContextConfiguration
 public class Hooks extends App1AbstractTestDefinition {
+    private final LogManager logger = new LogManager(Hooks.class);
 
-    @Autowired
-    private AppiumServer server;
+    private final AppiumService server;
+    private final HookUtils hookUtils;
+    private final DriverService driverFactory;
 
-    @Autowired
-    private HookUtils hookUtils;
+    public Hooks(AppiumService server, HookUtils hookUtils, DriverService driverFactory) {
+        this.server = server;
+        this.hookUtils = hookUtils;
+        this.driverFactory = driverFactory;
+    }
 
     @After
     public void tearDown(Scenario scenario) {
+        logger.debug("Started tearDown");
         hookUtils.takeScreenShot(scenario);
+        driverFactory.getDriver().quit();
         server.stopService();
         hookUtils.closeEmulator();
+        logger.debug("Finished tearDown");
     }
-
-
-
 }

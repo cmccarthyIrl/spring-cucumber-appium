@@ -4,6 +4,7 @@ import com.cmccarthy.common.utils.LogManager;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -21,9 +22,12 @@ public interface WaitHelper {
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
     }
 
-
-    default void waitForElementClickable(AppiumDriver driver, By locator) {
-        getWait(driver).until(ExpectedConditions.elementToBeClickable(locator));
+    default void waitForElementClickable(AppiumDriver driver, WebElement element) {
+        try {
+            getWait(driver).until(ExpectedConditions.elementToBeClickable(element));
+        } catch (Exception exception) {
+            logger.warn("Something went wrong waiting for the element to be clickable:" + exception.getMessage());
+        }
     }
 
     default void waitForPresenceOfElement(AppiumDriver driver, By element) {

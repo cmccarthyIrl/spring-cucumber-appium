@@ -1,8 +1,7 @@
-package com.cmccarthy.common.utils.services;
+package com.cmccarthy.common.utils;
 
 import com.cmccarthy.common.properties.DeviceProperties;
-import com.cmccarthy.common.utils.Capabilities;
-import com.cmccarthy.common.utils.LogManager;
+import com.cmccarthy.common.utils.services.AppiumService;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -16,16 +15,15 @@ import java.time.Duration;
 
 @Configuration
 @Lazy
-public class DriverService {
+public class DriverFactory {
 
-    private final LogManager logger = new LogManager(DriverService.class);
-
+    private final LogManager logger = new LogManager(DriverFactory.class);
     private final AppiumService appiumService;
     private final DeviceProperties deviceProperties;
     private final Capabilities capabilities;
     private AppiumDriver driver;
 
-    public DriverService(AppiumService appiumService, DeviceProperties deviceProperties, Capabilities capabilities) {
+    public DriverFactory(AppiumService appiumService, DeviceProperties deviceProperties, Capabilities capabilities) {
         this.appiumService = appiumService;
         this.deviceProperties = deviceProperties;
         this.capabilities = capabilities;
@@ -77,4 +75,11 @@ public class DriverService {
         setDriverTimeout(System.getProperty("INTEGRATION").equals("local") ? 30 : 60);
     }
 
+    public int getPlatformIndex() {
+        if(isAndroid()){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }

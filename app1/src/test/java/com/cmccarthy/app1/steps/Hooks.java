@@ -4,7 +4,7 @@ import com.cmccarthy.app1.config.App1AbstractTestDefinition;
 import com.cmccarthy.common.utils.HookUtils;
 import com.cmccarthy.common.utils.LogManager;
 import com.cmccarthy.common.utils.services.AppiumService;
-import com.cmccarthy.common.utils.services.DriverService;
+import com.cmccarthy.common.utils.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -15,9 +15,9 @@ public class Hooks extends App1AbstractTestDefinition {
 
     private final AppiumService server;
     private final HookUtils hookUtils;
-    private final DriverService driverFactory;
+    private final DriverFactory driverFactory;
 
-    public Hooks(AppiumService server, HookUtils hookUtils, DriverService driverFactory) {
+    public Hooks(AppiumService server, HookUtils hookUtils, DriverFactory driverFactory) {
         this.server = server;
         this.hookUtils = hookUtils;
         this.driverFactory = driverFactory;

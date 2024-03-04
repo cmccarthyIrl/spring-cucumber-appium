@@ -1,6 +1,6 @@
 package com.cmccarthy.common.config;
 
-import com.cmccarthy.common.utils.services.DriverService;
+import com.cmccarthy.common.utils.DriverFactory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
@@ -16,7 +16,7 @@ import java.time.Duration;
 
 @Component
 @Lazy
-@ContextConfiguration(classes = {DriverService.class})
+@ContextConfiguration(classes = {DriverFactory.class})
 public class PageObjectBeanPostProcessor implements BeanPostProcessor {
 
     @Autowired

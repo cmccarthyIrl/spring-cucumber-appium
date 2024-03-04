@@ -10,6 +10,13 @@ import java.util.List;
 @PageObject
 public class LoginSignUpPage extends TabBar {
 
+    double[] screenTop, screenBottom;
+
+    LoginSignUpPage() {
+        this.screenTop = new double[]{0.2, 0.2};
+        this.screenBottom = new double[]{0.9, 0.9};
+    }
+
     @AndroidFindBy(id = "facebook_login_button")
     @iOSXCUITFindBy(id = "Log in with Facebook")
     private WebElement logInWithFacebookButton;

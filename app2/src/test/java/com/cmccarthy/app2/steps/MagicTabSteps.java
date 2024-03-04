@@ -23,7 +23,7 @@ public class MagicTabSteps {
     }
 
     @Given("I tap Sign up or Log In button")
-    public void iTapSignUpOrLogInButton() {
+    public void iTapSignUpOrLogInButton() throws Exception {
         magicTabPage.clickSignUpOrLoginButton();
     }
 }

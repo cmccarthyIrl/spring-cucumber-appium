@@ -23,7 +23,6 @@ public interface TapHelper extends WaitHelper {
         try {
             getWait(driver).until(ExpectedConditions.visibilityOf(element)).click();
         } catch (Exception ignored) {
-            ignored.printStackTrace();
             logger.warn("Could not tap on the element, try tapping again");
             try {
                 getWait(driver).until(ExpectedConditions.visibilityOf(element)).click();
@@ -31,17 +30,6 @@ public interface TapHelper extends WaitHelper {
                 logger.warn("Could not tap on the element");
                 throw new NoSuchElementException("Could not tap on the element : " + ex1.getMessage());
             }
-        }
-    }
-
-    default void tapAction(AppiumDriver driver, By locator) {
-        try {
-            WebElement element = driver.findElement(locator);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element).click().perform();
-        } catch (Exception ex) {
-            logger.warn("Could not tap on the element");
-            throw new NoSuchElementException("Could not tap on the element : " + ex.getMessage());
         }
     }
 
@@ -63,61 +51,11 @@ public interface TapHelper extends WaitHelper {
         }
     }
 
-    default void tapWithoutValidationWebDriver(AppiumDriver driver, By locator) throws NoSuchElementException {
-        try {
-            ((WebDriver) driver).findElement(locator).click();
-        } catch (Exception ex1) {
-            throw new NoSuchElementException("Could not tap on the element : " + ex1.getMessage());
-        }
-    }
-
     /**
      * Android only
-     *
-     * @param element
      */
     default void clickWithJavaScript(AppiumDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-    }
-
-    /**
-     * Android only
-     *
-     * @param locator
-     */
-    default void clickWithJavaScript(AppiumDriver driver, By locator) {
-        JavascriptExecutor executor = driver;
-        WebElement element = driver.findElement(locator);
-        executor.executeScript("arguments[0].click();", element);
-    }
-
-    default void doubleTapElement(AppiumDriver driver, By locator) {
-        WebElement element = driver.findElement(locator);
-
-        Point location = element.getLocation();
-        Dimension dimension = element.getSize();
-
-        Point centerOfElement = new Point(location.getX() + dimension.getWidth() / 2
-                , location.getY() + dimension.getHeight() / 2);
-        ;
-
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence tap = new Sequence(finger, 1);
-
-        tap.addAction(
-                        finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), centerOfElement))
-                .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger, Duration.ofMillis(100)))
-                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger, Duration.ofMillis(100)));
-//                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-        try {
-            driver.perform(List.of(tap));
-        } catch (InvalidElementStateException exception) {
-            exception.printStackTrace();
-        }
     }
 
     default void tapMidPoint(AppiumDriver driver) {
@@ -134,5 +72,4 @@ public interface TapHelper extends WaitHelper {
         driver.perform(List.of(tap));
         logger.debug("The User tapped the middle of the screen");
     }
-
 }

@@ -15,7 +15,7 @@ public interface ElementHelper extends WaitHelper {
 
     LogManager logger = new LogManager(ElementHelper.class);
 
-    default boolean isNestedElementDisplayed(AppiumDriver driver, WebElement element, By locator) {
+    default boolean isNestedElementDisplayed(WebElement element, By locator) {
         try {
             return element.findElement(locator).isDisplayed();
         } catch (Exception ex) {
@@ -88,7 +88,7 @@ public interface ElementHelper extends WaitHelper {
         for (String s : locators) {
             try {
                 attributeValue = ele.getAttribute(s);
-                if (!attributeValue.equals("")) {
+                if (!attributeValue.isEmpty()) {
                     return attributeValue;
                 }
             } catch (Exception ignored) {
@@ -149,21 +149,7 @@ public interface ElementHelper extends WaitHelper {
         //get the By locator from the element
         //if the element is a nested element, extract the locators and append them
         try {
-            StringBuilder extractLocators = new StringBuilder();
-            for (String locatorType : locatorTypes) {
-                String separator = "-> " + locatorType + ": ";
-                int index = elementInfo.indexOf(separator);
-                while (index != -1) {
-                    int endIndex = elementInfo.indexOf("]", index);
-                    if (endIndex != -1) {
-                        String locator = elementInfo.substring(index + separator.length(), endIndex + 1);
-                        extractLocators.append(locator);
-                        index = elementInfo.indexOf(separator, endIndex);
-                    } else {
-                        break;
-                    }
-                }
-            }
+            StringBuilder extractLocators = getStringBuilder(locatorTypes, elementInfo);
 
             //find the element based on the new By locator
             WebElement retWebEl;
@@ -192,8 +178,26 @@ public interface ElementHelper extends WaitHelper {
             }
             return retWebEl;
         } catch (Exception exception) {
-            exception.printStackTrace();
-            throw new Exception("Could not refresh the elements location");
+            throw new Exception("Could not refresh the elements location: " + exception.getMessage());
         }
+    }
+
+    private static StringBuilder getStringBuilder(String[] locatorTypes, String elementInfo) {
+        StringBuilder extractLocators = new StringBuilder();
+        for (String locatorType : locatorTypes) {
+            String separator = "-> " + locatorType + ": ";
+            int index = elementInfo.indexOf(separator);
+            while (index != -1) {
+                int endIndex = elementInfo.indexOf("]", index);
+                if (endIndex != -1) {
+                    String locator = elementInfo.substring(index + separator.length(), endIndex + 1);
+                    extractLocators.append(locator);
+                    index = elementInfo.indexOf(separator, endIndex);
+                } else {
+                    break;
+                }
+            }
+        }
+        return extractLocators;
     }
 }

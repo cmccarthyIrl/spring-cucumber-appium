@@ -14,38 +14,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-      - name: Install Android SDK
+      - name: Start Emulator #
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip" -O android-sdk.zip
-          unzip -q android-sdk.zip -d $HOME/android-sdk
-          export ANDROID_HOME=$HOME/android-sdk
-          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
-          echo "y" | sdkmanager --install "platform-tools"
-          echo "y" | sdkmanager --install "emulator"
-          echo "y" | sdkmanager --install "system-images;android-31;default;x86_64"
-          export PATH=$ANDROID_HOME/emulator:$PATH
+          chmod +x ./.github/scripts/startEmulator.sh
+          ./.github/scripts/startEmulator.sh
 
-      - name: Start emulator
-        run: |
-          nohup emulator -avd testRunnner \
-            -skin 1080x1920 \
-            -no-snapshot \
-            -no-audio \
-            -no-boot-anim \
-            -accel auto \
-            -gpu auto \
-            -qemu -lcd-density 420 > /dev/null 2>&1 &
-
-      - name: Wait for emulator to be ready
-        run: adb wait-for-device
-
-      - name: List devices
-        run: adb devices
+  view_emulator_log:
+    needs: start_emulator
+    runs-on: ubuntu-latest
+    steps:
+      - name: View Emulator Log
+        run: cat emulator_log.txt

@@ -16,10 +16,14 @@ if [ -z "$ADB" ]; then
 fi
 
 # Add adb directory to PATH
-export PATH="$(dirname $ADB):$PATH"
+export PATH="$(dirname "$ADB"):$PATH"
 
 echo "Start the ADB server"
 $ADB start-server
+
+# Install the chosen system image
+echo "Install SDK System Image if not already installed..."
+echo "y" | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64" --verbose
 
 echo "Create AVD..."
 echo "no" | "$ANDROID_HOME"/cmdline-tools/latest/bin/avdmanager -v create avd \

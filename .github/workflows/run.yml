@@ -25,5 +25,5 @@ jobs:
           chmod +x ./.github/scripts/startEmulator.sh
           ./.github/scripts/startEmulator.sh 
 
-#      - name: Test
-#        run: mvn clean install
+      - name: Test
+        run: mvn clean install

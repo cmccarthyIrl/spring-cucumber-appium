@@ -1,3 +1,19 @@
+#!/bin/bash
+
+echo "Install Android SDK Platform Tools if not already installed..."
+if ! command -v adb &> /dev/null; then
+    echo "Installing Android SDK Platform Tools..."
+    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose > /dev/null
+fi
+
+# Find adb executable
+ADB=$(find "$ANDROID_HOME" -name adb -type f -print -quit)
+
+if [ -z "$ADB" ]; then
+    echo "ADB not found in $ANDROID_HOME or its subdirectories."
+    exit 1
+fi
+
 echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64" --verbose
 echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager -v create avd \
   -n testRunnner \
@@ -14,6 +30,8 @@ nohup $ANDROID_HOME/emulator/emulator -avd testRunnner \
   -accel auto \
   -gpu auto \
   -qemu -lcd-density 420 > /dev/null 2>&1 & \
-  $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
-$ANDROID_HOME/platform-tools/adb devices
+  $ADB wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
+
+echo "Connected Devices:"
+$ADB devices
 echo "Emulator started"

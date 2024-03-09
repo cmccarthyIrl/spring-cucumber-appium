@@ -37,10 +37,20 @@ nohup "$ANDROID_HOME"/emulator/emulator -avd testRunnner \
   -qemu -lcd-density 420 > /dev/null 2>&1 &
 
 # Wait for the emulator to fully boot
-while [ -z "$(adb shell getprop sys.boot_completed | tr -d '\r')" ]; do
-  echo "Sleeping"
-    sleep 1
+tries=0
+while [ $tries -lt 10 ]; do
+    if $ADB devices | grep -q emulator; then
+        break
+    fi
+    echo "Waiting for emulator to be detected..."
+    sleep 5
+    tries=$((tries + 1))
 done
+
+if ! $ADB devices | grep -q emulator; then
+    echo "Emulator not detected after multiple attempts. Exiting."
+    exit 1
+fi
 
 # Additional sleep for stability
 sleep 10

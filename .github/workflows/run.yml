@@ -1,4 +1,4 @@
-name: run
+name: Android Emulator Workflow
 
 on:
   push:
@@ -7,30 +7,44 @@ on:
     branches: [ "master" ]
 
 jobs:
-  start_emulator:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
           distribution: 'temurin'
-          cache: maven
+          java-version: '17'
 
-      - name: Start Emulator #
+      - name: Set up Android SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'android'
+          java-version: '17'
+          components: 'platform-tools, emulator'
+
+      - name: Install Android SDK components
         run: |
-          chmod +x ./.github/scripts/startEmulator.sh
-          ./.github/scripts/startEmulator.sh
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64"
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools"
 
-      - name: Test
-        run: mvn clean install
+      - name: Start emulator
+        run: |
+          nohup $ANDROID_HOME/emulator/emulator -avd testRunnner \
+            -skin 1080x1920 \
+            -no-snapshot \
+            -no-audio \
+            -no-boot-anim \
+            -accel auto \
+            -gpu auto \
+            -qemu -lcd-density 420 > /dev/null 2>&1 &
 
-  view_emulator_log:
-    needs: start_emulator
-    runs-on: ubuntu-latest
-    steps:
-      - name: View Emulator Log
-        run: cat emulator_log.txt
+      - name: Wait for emulator to be ready
+        run: adb wait-for-device
+
+      - name: List devices
+        run: adb devices

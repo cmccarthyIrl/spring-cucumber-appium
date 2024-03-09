@@ -3,7 +3,7 @@
 # Install Android SDK Platform Tools if not already installed
 if ! command -v adb &> /dev/null; then
     echo "Installing Android SDK Platform Tools..."
-    echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose
+    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose > /dev/null
 fi
 
 # Find adb executable

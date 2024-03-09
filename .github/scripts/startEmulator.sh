@@ -6,6 +6,23 @@ export PATH=$ANDROID_HOME/emulator/:$PATH
 export PATH=$ANDROID_HOME/platform-tools/:$PATH
 export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$PATH
 
+echo "Install Android SDK Platform Tools if not already installed..."
+if ! command -v adb &> /dev/null; then
+    echo "Installing Android SDK Platform Tools..."
+    yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose
+fi
+
+# Find adb executable
+ADB=$(find "$ANDROID_HOME" -name adb -type f -print -quit)
+
+if [ -z "$ADB" ]; then
+    echo "ADB not found in $ANDROID_HOME or its subdirectories."
+    exit 1
+fi
+
+# Add adb directory to PATH
+export PATH="$(dirname $ADB):$PATH"
+
 # Function to check if a package is installed and install it if missing
 check_and_install_package() {
     if ! command -v "$1" &>/dev/null; then

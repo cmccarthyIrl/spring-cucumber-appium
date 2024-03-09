@@ -20,21 +20,22 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'android'
-          java-version: '17'
-          components: 'platform-tools, emulator'
-
-      - name: Install Android SDK components
+      - name: Install Android SDK
         run: |
-          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64"
-          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools"
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip" -O android-sdk.zip
+          unzip -q android-sdk.zip -d $HOME/android-sdk
+          export ANDROID_HOME=$HOME/android-sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+          echo "y" | sdkmanager --install "platform-tools"
+          echo "y" | sdkmanager --install "emulator"
+          echo "y" | sdkmanager --install "system-images;android-31;default;x86_64"
+          export PATH=$ANDROID_HOME/emulator:$PATH
 
       - name: Start emulator
         run: |
-          nohup $ANDROID_HOME/emulator/emulator -avd testRunnner \
+          nohup emulator -avd testRunnner \
             -skin 1080x1920 \
             -no-snapshot \
             -no-audio \

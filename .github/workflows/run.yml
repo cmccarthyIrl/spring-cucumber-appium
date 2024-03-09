@@ -22,7 +22,7 @@ jobs:
 
       - name: Start Emulator #
         run: |
-          chmod +x ./.github/scripts/InstallChrome.sh
+          chmod +x ./.github/scripts/startEmulator.sh
           ./.github/scripts/startEmulator.sh 
 
 #      - name: Test

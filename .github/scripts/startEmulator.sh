@@ -15,12 +15,13 @@ if [ -z "$ADB" ]; then
 fi
 
 echo "Start the ADB server"
-$ANDROID_HOME/platform-tools/adb start-server
+$ADB start-server
 
 echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64" --verbose
 echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager -v create avd \
   -n testRunnner \
   -k "system-images;android-31;default;x86_64" \
+  -f \
   --force
 echo "Emulators:"
 $ANDROID_HOME/emulator/emulator -list-avds

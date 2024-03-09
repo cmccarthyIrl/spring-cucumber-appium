@@ -29,6 +29,6 @@ $ADB wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r
 
 # List connected devices
 echo "Connected Devices:"
-$ADB devices
+$ADB devices > /dev/null
 
 echo "Emulator started"

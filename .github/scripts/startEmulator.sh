@@ -1,14 +1,10 @@
 #!/bin/bash
 
-ANDROID_HOME=~/usr/local/lib/android/sdk
-export PATH=$ANDROID_HOME/emulator/:$PATH
-export PATH=$ANDROID_HOME/platform-tools/:$PATH
-export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$PATH
-
 echo "Install Android SDK Platform Tools if not already installed..."
 if ! command -v adb &> /dev/null; then
     echo "Installing Android SDK Platform Tools..."
     yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose
+    export PATH=$ANDROID_HOME/platform-tools/:$PATH
 fi
 
 # Find adb executable

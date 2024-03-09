@@ -34,6 +34,7 @@ echo "no" | "$ANDROID_HOME"/cmdline-tools/latest/bin/avdmanager -v create avd \
 echo "Emulators:"
 "$ANDROID_HOME"/emulator/emulator -list-avds
 
+
 nohup "$ANDROID_HOME"/emulator/emulator -avd testRunnner \
   -skin 1080x1920 \
   -no-snapshot \

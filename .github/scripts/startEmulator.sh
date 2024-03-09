@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export ANDROID_HOME=/usr/local/lib/android/sdk
+
+
 echo "Install Android SDK Platform Tools if not already installed..."
 if ! command -v adb &> /dev/null; then
     echo "Installing Android SDK Platform Tools..."

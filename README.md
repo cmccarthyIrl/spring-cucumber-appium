@@ -76,7 +76,7 @@ Appium `<dependencies>`:
 **Install**:
 
 - [Intellij IDE](https://www.jetbrains.com/idea/) - `Recommended`
-- [Java JDK 11](https://jdk.java.net/java-se-ri/11)
+- [Java JDK 17](https://jdk.java.net/java-se-ri/11)
 - [Android Studio / SDK](https://developer.android.com/studio)
 - [Apache Maven 3.6.3](https://maven.apache.org/docs/3.6.3/release-notes.html)
 

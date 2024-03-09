@@ -1,23 +1,12 @@
 #!/bin/bash
 
-# Variables
-SDK_MANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-AVD_MANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
-EMULATOR="$ANDROID_HOME/emulator/emulator"
-ADB="$ANDROID_HOME/platform-tools/adb"
+# Find adb executable
+ADB=$(find $ANDROID_HOME -name adb -type f -print -quit)
 
-# Install necessary system image
-echo "y" | $SDK_MANAGER --install "system-images;android-31;default;x86_64" --verbose
-
-# Create AVD
-echo "no" | $AVD_MANAGER -v create avd \
-  -n testRunner \
-  -k "system-images;android-31;default;x86_64" \
-  --force
-
-# List available emulators
-echo "Available Emulators:"
-$EMULATOR -list-avds
+if [ -z "$ADB" ]; then
+    echo "ADB not found in $ANDROID_HOME or its subdirectories."
+    exit 1
+fi
 
 # Start emulator
 nohup $EMULATOR -avd testRunner \

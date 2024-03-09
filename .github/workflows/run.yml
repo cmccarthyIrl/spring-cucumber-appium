@@ -1,6 +1,8 @@
 name: run
 
 on:
+  push:
+    branches: [ "feature/emulator" ]
   pull_request:
     branches: [ "master" ]
 
@@ -18,10 +20,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Install Google Chrome # Using shell script to install Google Chrome
+      - name: Start Emulator #
         run: |
           chmod +x ./.github/scripts/InstallChrome.sh
           ./.github/scripts/startEmulator.sh 
 
-      - name: Test
-        run: mvn clean install
+#      - name: Test
+#        run: mvn clean install

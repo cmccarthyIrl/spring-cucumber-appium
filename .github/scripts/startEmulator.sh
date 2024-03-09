@@ -40,12 +40,12 @@ nohup "$ANDROID_HOME"/emulator/emulator -avd testRunnner \
 
 # Wait for the emulator to fully boot
 tries=0
-while [ $tries -lt 10 ]; do
+while [ $tries -lt 20 ]; do
     if $ADB devices | grep -q emulator; then
         break
     fi
     echo "Waiting for emulator to be detected..."
-    sleep 5
+    sleep 10
     tries=$((tries + 1))
 done
 

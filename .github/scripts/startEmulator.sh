@@ -3,7 +3,7 @@
 echo "Install Android SDK Platform Tools if not already installed..."
 if ! command -v adb &> /dev/null; then
     echo "Installing Android SDK Platform Tools..."
-    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose > /dev/null
+    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose
 fi
 
 # Find adb executable
@@ -13,6 +13,9 @@ if [ -z "$ADB" ]; then
     echo "ADB not found in $ANDROID_HOME or its subdirectories."
     exit 1
 fi
+
+echo "Start the ADB server"
+$ANDROID_HOME/platform-tools/adb start-server
 
 echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64" --verbose
 echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager -v create avd \

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Install Android SDK Platform Tools if not already installed
+if ! command -v adb &> /dev/null; then
+    echo "Installing Android SDK Platform Tools..."
+    echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" --verbose
+fi
+
 # Find adb executable
 ADB=$(find $ANDROID_HOME -name adb -type f -print -quit)
 

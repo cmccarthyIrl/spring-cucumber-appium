@@ -34,7 +34,8 @@ nohup $ANDROID_HOME/emulator/emulator -avd testRunnner \
   -accel auto \
   -gpu auto \
   -qemu -lcd-density 420 > /dev/null 2>&1 &
-  $ADB wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
+
+sleep 60
 
 echo "Connected Devices:"
 $ADB devices

@@ -20,7 +20,15 @@ export PATH="$(dirname $ADB):$PATH"
 echo "Start the ADB server"
 $ADB start-server
 
+# List available system images
+echo "Available System Images:"
+"$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --list --verbose | grep "system-images"
+
+# Install the chosen system image
+echo "Install Android SDK System Image if not already installed..."
 echo "y" | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;default;x86_64" --verbose
+
+echo "Create AVD..."
 echo "no" | "$ANDROID_HOME"/cmdline-tools/latest/bin/avdmanager -v create avd \
   -n testRunnner \
   -k "system-images;android-31;default;x86_64" \

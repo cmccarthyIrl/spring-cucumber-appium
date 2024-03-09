@@ -7,12 +7,12 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  start_emulator:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -23,7 +23,11 @@ jobs:
       - name: Start Emulator #
         run: |
           chmod +x ./.github/scripts/startEmulator.sh
-          ./.github/scripts/startEmulator.sh 
+          ./.github/scripts/startEmulator.sh
 
-      - name: Test
-        run: mvn clean install
+  view_emulator_log:
+    needs: start_emulator
+    runs-on: ubuntu-latest
+    steps:
+      - name: View Emulator Log
+        run: cat emulator_log.txt

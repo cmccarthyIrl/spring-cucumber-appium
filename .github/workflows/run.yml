@@ -25,6 +25,9 @@ jobs:
           chmod +x ./.github/scripts/startEmulator.sh
           ./.github/scripts/startEmulator.sh
 
+      - name: Test
+        run: mvn clean install
+
   view_emulator_log:
     needs: start_emulator
     runs-on: ubuntu-latest

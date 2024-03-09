@@ -35,7 +35,14 @@ nohup $ANDROID_HOME/emulator/emulator -avd testRunnner \
   -gpu auto \
   -qemu -lcd-density 420 > /dev/null 2>&1 &
 
-sleep 60
+# Wait for the emulator to fully boot
+while [ -z "$(adb shell getprop sys.boot_completed | tr -d '\r')" ]; do
+  echo "Sleeping"
+    sleep 1
+done
+
+# Additional sleep for stability
+sleep 10
 
 echo "Connected Devices:"
 $ADB devices
